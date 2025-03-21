@@ -45,6 +45,12 @@ return {
 				end,
 				opts = { buffer = true },
 			},
+			["<leader>nf"] = {
+				action = function()
+					return vim.cmd("ObsidianQuickSwitch")
+				end,
+				opts = { buffer = true },
+			},
 			-- Smart action depending on context, either follow link or toggle checkbox.
 			["<cr>"] = {
 				action = function()
@@ -56,7 +62,7 @@ return {
 
 		picker = {
 			-- Set your preferred picker. Can be one of 'telescope.nvim', 'fzf-lua', or 'mini.pick'.
-			name = "telescope.nvim",
+			name = "fzf-lua",
 			-- Optional, configure key mappings for the picker. These are the defaults.
 			-- Not all pickers support all mappings.
 			note_mappings = {

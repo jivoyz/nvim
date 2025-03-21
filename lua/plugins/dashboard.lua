@@ -2,31 +2,16 @@ return {
   "nvimdev/dashboard-nvim",
   event = "VimEnter",
   config = function()
-    local logo = {}
-    local ascii = {
-[[]],
-[[]],
-[[  o\]],
-[[   _________/__\__________]],
-[[  |                  - (  |]],
-[[ ,'-.                 . `-|]],
-[[(____".       ,-.    '   ||]],
-[[  |          /\,-\   ,-.  |]],
-[[  |      ,-./     \ /'.-\ |]],
-[[  |     /-.,\      /     \|]],
-[[  |    /     \    ,-.     \]],
-[[    |___/_______\__/___\_____\]],
-[[]],
-[[]],
-    }
-    for _, item in ipairs(ascii) do
-      table.insert(logo, item)
-    end
+    local logo = require("ascii");
+
+    -- for _, item in ipairs() do
+    --   table.insert(logo, item)
+    -- end
 
     require("dashboard").setup {
       theme = "doom",
       config = {
-        header = logo,
+        header = logo.neovim_default,
         center = {
           {
             icon = "  ",
@@ -36,21 +21,28 @@ return {
             key = "f",
             keymap = "SPC ;",
             key_hl = "Number",
-            action = "lua require'telescope.builtin'.find_files()"
+            action = "FzfLua files"
           },
           {
             icon = "  ",
             desc = "Nvim config",
             key = "n",
             keymap = "SPC ; n",
-            action = "lua require'telescope.builtin'.find_files({ cwd = '~/.config/nvim', prompt_title = 'neovim', hidden='true', no_ignore='true' })"
+            action = "FzfLua files cwd=~/.config/nvim"
           },
           {
             icon = "  ",
             desc = "Find Dotfiles",
             key = "d",
             keymap = "SPC ; d",
-            action = "lua require'telescope.builtin'.find_files({ cwd = '~/dotfiles', prompt_title = 'dotfiles', hidden='true', no_ignore='true' })"
+            action = "FzfLua files cwd=~/dotfiles"
+          },
+          {
+            icon = "  ",
+            desc = "Change colorscheme",
+            key = "c",
+            keymap = "SPC ; c",
+            action = "FzfLua colorschemes"
           },
         },
         footer = {},

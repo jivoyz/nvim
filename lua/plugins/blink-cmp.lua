@@ -29,14 +29,25 @@ return {
       },
 
       completion = {
-        menu = { border = "single" },
         documentation = { window = { border = "single" } },
-        menu = { auto_show = function(ctx) return ctx.mode ~= 'cmdline' end }
+        list = { selection = { preselect = false, auto_insert = false } },
+        accept = { auto_brackets = { enabled = false }, },
+        menu = {
+          border = "single",
+          auto_show = function(ctx) return ctx.mode ~= 'cmdline' end,
+          draw = { columns = { { "label", "label_description", gap = 1 }, { "kind", "kind_icon" } } }
+        },
       },
       signature = { window = { border = "single" } },
 
       sources = {
-        default = { "lsp", "path", "snippets", "buffer" },
+        default = function()
+          if vim.bo.filetype == "javascriptreact" or "typescriptreact" or "javascript" or "typescript" then
+            return { "lsp", "buffer" }
+          else
+            return { "lsp", "path", "snippets", "buffer" }
+          end
+        end,
       },
     },
     opts_extend = { "sources.default" },
