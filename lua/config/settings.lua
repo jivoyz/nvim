@@ -9,7 +9,7 @@ vim.cmd("set hlsearch")
 vim.cmd("set number relativenumber")
 
 vim.opt.termguicolors = true
-vim.opt.conceallevel = 1
+vim.opt.conceallevel = 0
 
 -- highlight yanked text for 200ms using the "Visual" highlight group
 vim.cmd([[
