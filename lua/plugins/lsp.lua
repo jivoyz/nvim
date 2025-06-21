@@ -1,66 +1,49 @@
 return {
 	{
-		"williamboman/mason.nvim",
-		lazy = false,
-		config = function()
-			require("mason").setup({})
-		end,
-	},
-	{
-		"williamboman/mason-lspconfig.nvim",
-		lazy = false,
-		config = function()
-			require("mason-lspconfig").setup({
-				ensure_installed = {
-					"ts_ls",
-					"emmet_language_server",
-					"tailwindcss",
-					"html",
-					"cssls",
-					"rust_analyzer",
-					"lua_ls",
-					"bashls",
-				},
-			})
-		end,
-	},
-	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			"saghen/blink.cmp",
 		},
 		config = function()
-			-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      local capabilities = require('blink.cmp').get_lsp_capabilities()
+			local capabilities = require("blink.cmp").get_lsp_capabilities()
 			local lspconfig = require("lspconfig")
 
 			local servers = {
-				"ts_ls",
 				"lua_ls",
 				"rust_analyzer",
 				"emmet_language_server",
 				"cssls",
 				"html",
-				"clangd",
-				"bashls",
-				"gopls",
-				"tailwindcss",
-				"pylsp",
 			}
+
 			for _, lsp in ipairs(servers) do
-				lspconfig[lsp].setup({
-					-- on_attach = my_custom_on_attach,
+				vim.lsp.config(lsp, {
 					capabilities = capabilities,
 				})
+				vim.lsp.enable(lsp)
 			end
 
-			lspconfig.volar.setup({
-				init_options = {
-					typescript = {
-						tsdk = "/usr/lib/node_modules/typescript/lib",
-					},
+			vim.lsp.config("tailwindcss", {
+				tailwindcss = {
+					hovers = true,
+					suggestions = true,
+					root_dir = function(fname)
+						local root_pattern = lspconfig.util.root_pattern(
+							"tailwind.config.cjs",
+							"tailwind.config.js",
+							"postcss.config.js"
+						)
+						return root_pattern(fname)
+					end,
 				},
 			})
+
+			vim.lsp.config("html", {
+				filetypes = { "html" },
+			})
+
+			vim.lsp.enable("tailwindcss")
+			vim.lsp.enable("html")
 
 			-- Add border to pop up windows
 			require("lspconfig.ui.windows").default_options.border = "single"
