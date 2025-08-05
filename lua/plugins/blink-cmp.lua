@@ -33,7 +33,7 @@ return {
 				list = { selection = { preselect = false, auto_insert = false } },
 				accept = { auto_brackets = { enabled = false } },
 				menu = {
-					border = "single",
+					border = "rounded",
 					auto_show = function(ctx)
 						return ctx.mode ~= "cmdline"
 					end,
@@ -45,9 +45,9 @@ return {
 			sources = {
 				default = function()
 					if vim.bo.filetype == "javascriptreact" or "typescriptreact" or "javascript" or "typescript" then
-						return { "lsp", "buffer" }
+						return { "lsp", "buffer", "snippets" }
 					else
-						return { "lsp", "path", "snippets", "buffer" }
+						return { "lsp", "path", "snippets" }
 					end
 				end,
 			},

@@ -7,67 +7,48 @@ return {
 		-- your configuration comes here
 		-- or leave it empty to use the default settings
 		-- refer to the configuration section below
-		bigfile = { enabled = true },
-		dashboard = { enabled = true },
-		explorer = { enabled = true },
-		picker = { enabled = true },
-		quickfile = { enabled = true },
-		scope = { enabled = true },
-		indent = { enabled = false },
-		input = { enabled = false },
-		scroll = { enabled = false },
-		statuscolumn = { enabled = false },
-		words = { enabled = false },
+		picker = {
+			enabled = true,
+			hidden = true,
+			ignored = true,
+			exclude = { "node_modules", ".git" },
+		},
+		dashboard = {
+			enabled = true,
+			sections = {
+				{ section = "header" },
+				{ icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
+				{ icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
+				{ section = "startup" },
+			},
+		},
 	},
 	keys = {
-		{
-			"<leader>e",
-			function()
-				Snacks.explorer({ autoclose = true, jump = { close = true } })
-			end,
-		},
 		{
 			"<leader>;f",
 			function()
 				Snacks.picker.files()
 			end,
-			desc = "Find Files",
+			desc = "Find files",
 		},
 		{
 			"<leader>;g",
 			function()
 				Snacks.picker.grep()
 			end,
-			desc = "Grep",
-		},
-		{
-			"<leader>;b",
-			function()
-				Snacks.picker.buffers()
-			end,
-			desc = "Grep",
-		},
-		{
-			"<leader>lg",
-			function()
-				Snacks.lazygit()
-			end,
-			desc = "Lazygit",
-		},
-		{
-			"<leader>;r",
-			function()
-				Snacks.picker.lsp_references()
-			end,
-			nowait = true,
-			desc = "References",
+			desc = "Grep files",
 		},
 		{
 			"<leader>;d",
 			function()
+				Snacks.picker.diagnostics_buffer()
+			end,
+		},
+		{
+			"<leader>;D",
+			function()
 				Snacks.picker.diagnostics()
 			end,
-			desc = "Diagnostics",
 		},
 	},
 }

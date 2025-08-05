@@ -8,15 +8,10 @@ return {
 				highlight = { enable = true },
 				indent = { enable = true },
 				auto_install = true,
+				ignore_install = { "org" },
+				sync_install = true,
 			})
 		end,
-	},
-	{
-		-- Enables JSX/TSX comments
-		"folke/ts-comments.nvim",
-		opts = {},
-		event = "VeryLazy",
-		enabled = vim.fn.has("nvim-0.10.0") == 1,
 	},
 	{
 		"nvim-treesitter/nvim-treesitter-context",
