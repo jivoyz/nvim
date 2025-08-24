@@ -9,7 +9,9 @@ vim.lsp.enable({
 	"bashls",
 	"gopls",
 	"rust_analyzer",
-  "emmet_language_server"
+	"emmet_language_server",
+	"pylsp",
+	"ccls",
 })
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {

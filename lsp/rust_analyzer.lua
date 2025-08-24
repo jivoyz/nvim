@@ -1,5 +1,5 @@
 return {
-	cmd = { "rust-analyzer" },
 	filetypes = { "rust" },
-	workspace_required = true,
+	cmd = { "rust-analyzer" },
+	workspace_required = false,
 }
