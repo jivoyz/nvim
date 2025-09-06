@@ -29,9 +29,9 @@ return {
 			},
 
 			completion = {
-				documentation = { window = { border = "single" } },
+				documentation = { window = { border = "rounded" } },
 				list = { selection = { preselect = false, auto_insert = false } },
-				accept = { auto_brackets = { enabled = false } },
+				accept = { auto_brackets = { enabled = true } },
 				menu = {
 					border = "rounded",
 					auto_show = function(ctx)
